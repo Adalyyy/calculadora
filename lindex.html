@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 🔹 Cuando cambias selects → actualiza input
+    // 🔹 Cuando cambias, actualiza input
     function actualizarInput() {
         if (propietario.value !== "" && grupos.value !== "" && otros.value !== "") {
             input.value = propietario.value + grupos.value + otros.value;
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     grupos.addEventListener("change", actualizarInput);
     otros.addEventListener("change", actualizarInput);
 
-    // 🔹 Validación al enviar
+    // 🔹 Validación 
     form.addEventListener("submit", function (e) {
         if (!validacion.test(input.value)) {
             e.preventDefault();
