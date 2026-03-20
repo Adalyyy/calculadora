@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Convertidor de permisos</title>
+</head>
+<body>
+   
+    <form class="container mt-5 border shadow p-4 glass main-card " style="max-width: 400px;" method="POST" id="frmPermisos">
+        <h4 class="text-center">Ingrese el permiso:</h4>
+        
+            <label>Permiso:</label>
+            <input 
+            class="form-control glass-input" 
+            type="number" 
+            id="permisoinput"
+            name="permisoinput" 
+            required
+            placeholder="Ingrese el numero del permiso">
+
+            <label>Propietario:</label>
+           <br>
+            <select name="propietario" id="propietario" class="glass-input" >
+                <option value=""></option>
+                <option value="7">Lectura, escritura y ejecucion</option>
+                <option value="6">Lectura y escritura</option>
+                <option value="5">Lectura y ejecucion</option>
+                <option value="4">Lectura</option>
+                <option value="3">Escritura y ejecucion</option>
+                <option value="2">Escitura</option>
+                <option value="1">Ejecucion</option>
+                <option value="0">Ningun permiso</option>
+            </select>
+            <br>
+
+            <label>Grupos:</label>
+            <br>
+            <select name="grupos" id="grupos" class="glass-input" >
+                <option value=""></option>
+                <option value="7">Lectura, escritura y ejecucion</option>
+                <option value="6">Lectura y escritura</option>
+                <option value="5">Lectura y ejecucion</option>
+                <option value="4">Lectura</option>
+                <option value="3">Escritura y ejecucion</option>
+                <option value="2">Escitura</option>
+                <option value="1">Ejecucion</option>
+                <option value="0">Ningun permiso</option>
+            </select>
+            <br>
+            
+            
+            <label>Otros:</label>
+            <br>
+            <select name="otros" id="otros" class="glass-input" >
+                <option value=""></option>
+                <option value="7">Lectura, escritura y ejecucion</option>
+                <option value="6">Lectura y escritura</option>
+                <option value="5">Lectura y ejecucion</option>
+                <option value="4">Lectura</option>
+                <option value="3">Escritura y ejecucion</option>
+                <option value="2">Escitura</option>
+                <option value="1">Ejecucion</option>
+                 <option value="0">Ningun permiso</option>
+            </select>
+            <br>
+        
+    </form>
+  
+</body>
+</html>
+<script src="js/main.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("permisoinput");
+    const propietario = document.getElementById("propietario");
+    const grupos = document.getElementById("grupos");
+    const otros = document.getElementById("otros");
+    const form = document.getElementById("frmPermisos");
+
+    const validacion= /^[0-7]{3}$/;
+
+
+    input.addEventListener("input", function () {
+        let valor = input.value;
+
+        if (validacion.test(valor)) {
+            propietario.value = valor.charAt(0);
+            grupos.value = valor.charAt(1);
+            otros.value = valor.charAt(2);
+        }
+    });
+
+    // 🔹 Cuando cambias selects → actualiza input
+    function actualizarInput() {
+        if (propietario.value !== "" && grupos.value !== "" && otros.value !== "") {
+            input.value = propietario.value + grupos.value + otros.value;
+        }
+    }
+
+    propietario.addEventListener("change", actualizarInput);
+    grupos.addEventListener("change", actualizarInput);
+    otros.addEventListener("change", actualizarInput);
+
+    // 🔹 Validación al enviar
+    form.addEventListener("submit", function (e) {
+        if (!validacion.test(input.value)) {
+            e.preventDefault();
+            alert("Ingresa un permiso válido de 3 dígitos");
+            input.focus();
+        }
+    });
+
+});
+</script>
